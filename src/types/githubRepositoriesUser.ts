@@ -67,3 +67,12 @@ export interface GithubRepository {
   watchers: number;
   default_branch: string;
 }
+
+export type SortField =
+  | 'stargazers_count'
+  | 'full_name'
+  | 'created_at'
+  | 'language';
+export type SortDirection = 'asc' | 'desc';
+
+export type SortOption = `${SortField}-${SortDirection}`;

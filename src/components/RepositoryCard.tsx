@@ -19,16 +19,6 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
               >
                 {repository.full_name}
               </a>
-              {repository.visibility === 'public' && (
-                <span className="badge bg-secondary-subtle text-secondary-emphasis ms-2 fs-6">
-                  Public
-                </span>
-              )}
-              {repository.fork && (
-                <span className="badge bg-info-subtle text-info-emphasis ms-1 fs-6">
-                  Fork
-                </span>
-              )}
             </div>
           </div>
 
@@ -41,7 +31,6 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
           <div className="d-flex align-items-center gap-4 mt-2 text-secondary small">
             {repository.language && (
               <div className="d-flex align-items-center gap-1">
-                <span className="dot"></span>
                 <span>{repository.language}</span>
               </div>
             )}
@@ -74,36 +63,6 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
           </div>
         </div>
       </div>
-
-      <style>{`
-        .dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background-color: ${getLanguageColor(repository.language)};
-        }
-        .hover-shadow:hover {
-          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-        }
-      `}</style>
     </div>
   );
-}
-
-function getLanguageColor(language: string | null): string {
-  const colors: Record<string, string> = {
-    TypeScript: '#3178c6',
-    JavaScript: '#f1e05a',
-    Python: '#3572A5',
-    Java: '#b07219',
-    'C++': '#f34b7d',
-    HTML: '#e34c26',
-    CSS: '#563d7c',
-    Go: '#00ADD8',
-    Rust: '#dea584',
-    Ruby: '#701516',
-    PHP: '#4F5D95',
-    Swift: '#F05138',
-  };
-  return colors[language || ''] || '#8b949e';
 }
