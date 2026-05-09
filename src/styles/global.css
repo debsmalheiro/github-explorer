@@ -1,0 +1,52 @@
+.github-icon {
+  font-size: 80px;
+}
+
+.github-title {
+  font-size: 32px;
+  color: #08060d;
+}
+
+.github-subtitle {
+  font-size: 16px;
+  color: #6b6375;
+}
+
+.github-input {
+  border: 1px solid #e0e0e0;
+  padding: 14px 16px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.github-input:focus {
+  border-color: #08060d;
+  box-shadow: 0 0 0 0.2rem rgba(8, 6, 13, 0.1);
+}
+
+.github-button {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #08060d;
+  border-color: #08060d;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.github-button:hover {
+  background-color: #1a1720;
+  border-color: #1a1720;
+}
+
+@media (max-width: 576px) {
+  .github-icon {
+    font-size: 64px;
+  }
+
+  .github-title {
+    font-size: 28px;
+  }
+
+  .github-subtitle {
+    font-size: 14px;
+  }
+}
