@@ -5,6 +5,14 @@ interface UserProfileProps {
 }
 
 export default function UserProfile({ user }: UserProfileProps) {
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
+
   return (
     <div className="card shadow-sm border-0">
       <div className="card-body p-5">
@@ -17,10 +25,11 @@ export default function UserProfile({ user }: UserProfileProps) {
           />
           <div className="flex-grow-1 text-center text-md-start">
             <h2 className="fw-bold mb-2">{user.name || user.login}</h2>
+            <p className="text-muted mb-3">@{user.login}</p>
 
-            {user.bio ? <p className="text-muted mb-3">{user.bio}</p> : null}
+            {user.bio ? <p className="mb-3">{user.bio}</p> : null}
 
-            <div className="d-flex justify-content-center justify-content-md-start gap-4 text-muted">
+            <div className="d-flex justify-content-center justify-content-md-start gap-4 text-muted mb-3">
               <span className="d-flex align-items-center gap-2">
                 <span>⭐</span>
                 <span>{user.followers} seguidores</span>
@@ -33,6 +42,52 @@ export default function UserProfile({ user }: UserProfileProps) {
                 <span>📦</span>
                 <span>{user.public_repos} repositórios</span>
               </span>
+            </div>
+
+            <div className="d-flex flex-column flex-md-row gap-3 text-muted small mb-3">
+              {user.company && <span>🏢 {user.company}</span>}
+              {user.location && <span>📍 {user.location}</span>}
+              {user.email && (
+                <span>
+                  📧{' '}
+                  <a
+                    href={`mailto:${user.email}`}
+                    className="text-decoration-none"
+                  >
+                    {user.email}
+                  </a>
+                </span>
+              )}
+              {user.blog && (
+                <span>
+                  🔗{' '}
+                  <a
+                    href={user.blog}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-decoration-none"
+                  >
+                    {user.blog}
+                  </a>
+                </span>
+              )}
+              {user.html_url && (
+                <span>
+                  👤{' '}
+                  <a
+                    href={user.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-decoration-none"
+                  >
+                    GitHub
+                  </a>
+                </span>
+              )}
+            </div>
+
+            <div className="text-muted small">
+              <span>📅 Entrou em {formatDate(user.created_at)}</span>
             </div>
           </div>
         </div>
