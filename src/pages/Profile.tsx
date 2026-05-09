@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGithubUser } from '../hooks/useGithubUser';
 import UserProfile from '../components/UserProfile';
+import RepositoriesList from '../components/RepositoriesList';
 import ErrorCard from '../components/ErrorCard';
 
 function Profile() {
@@ -35,6 +36,7 @@ function Profile() {
   return (
     <>
       <UserProfile user={data} />
+      <RepositoriesList user={data.login} />
     </>
   );
 }
