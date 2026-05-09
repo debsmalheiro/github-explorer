@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGithubUser } from '../hooks/useGithubUser';
 import UserCard from '../components/UserCard';
+import ErrorCard from '../components/ErrorCard';
 
 function Home() {
   const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ function Home() {
             </div>
           </form>
 
-          {error && <div className="alert alert-danger">{error}</div>}
+          {error && <ErrorCard error={error} />}
 
           {data && <UserCard user={data} />}
         </div>
