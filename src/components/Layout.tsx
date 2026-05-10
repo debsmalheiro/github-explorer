@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
           </Link>
         </div>
       </header>
-      <main className="container flex-grow-1" style={{ paddingTop: '80px' }}>
+      <main className="container flex-grow-1 main-with-fixed-header">
         {children}
       </main>
       <footer className="bg-white border-top py-4">

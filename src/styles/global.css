@@ -37,6 +37,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.main-with-fixed-header {
+  padding-top: 80px;
+}
+
 .home-container {
   max-width: 600px;
   margin: 0 auto;
@@ -205,6 +209,7 @@ body {
   transition:
     box-shadow var(--transition),
     transform var(--transition);
+  contain: layout;
 }
 
 .user-card:hover .user-card-inner {
@@ -221,6 +226,7 @@ body {
 .user-card-avatar {
   width: 80px;
   height: 80px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-full);
   object-fit: cover;
   flex-shrink: 0;
@@ -275,6 +281,7 @@ body {
 .skeleton-avatar {
   width: 80px;
   height: 80px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-full);
 }
 

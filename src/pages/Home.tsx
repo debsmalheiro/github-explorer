@@ -2,6 +2,7 @@ import { useEffect, useTransition, useActionState, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { searchUserAction } from '../actions/searchUser';
 import UserCard from '../components/UserCard';
+import UserCardSkeleton from '../components/UserCardSkeleton';
 import { SearchForm } from '../components/SearchForm';
 import { Icon } from '../components/Icon';
 
@@ -53,7 +54,8 @@ function Home() {
           </div>
         )}
 
-        {formState.user && <UserCard user={formState.user} />}
+        {isFormPending && <UserCardSkeleton />}
+        {!isFormPending && formState.user && <UserCard user={formState.user} />}
       </div>
     </div>
   );
