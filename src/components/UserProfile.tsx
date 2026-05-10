@@ -29,20 +29,20 @@ export default function UserProfile({ user }: UserProfileProps) {
 
             {user.bio ? <p className="mb-3">{user.bio}</p> : null}
 
-            <div className="d-flex justify-content-center justify-content-md-start gap-4 text-muted mb-3">
-              <span className="d-flex align-items-center gap-2">
-                <span>⭐</span>
+            <ul className="d-flex justify-content-center justify-content-md-start gap-4 text-muted mb-3 list-unstyled">
+              <li className="d-flex align-items-center gap-2">
+                <span aria-hidden="true">⭐</span>
                 <span>{user.followers} seguidores</span>
-              </span>
-              <span className="d-flex align-items-center gap-2">
-                <span>👥</span>
+              </li>
+              <li className="d-flex align-items-center gap-2">
+                <span aria-hidden="true">👥</span>
                 <span>{user.following} seguindo</span>
-              </span>
-              <span className="d-flex align-items-center gap-2">
-                <span>📦</span>
+              </li>
+              <li className="d-flex align-items-center gap-2">
+                <span aria-hidden="true">📦</span>
                 <span>{user.public_repos} repositórios</span>
-              </span>
-            </div>
+              </li>
+            </ul>
 
             <div className="d-flex flex-column flex-md-row gap-3 text-muted small mb-3">
               {user.company && <span>🏢 {user.company}</span>}

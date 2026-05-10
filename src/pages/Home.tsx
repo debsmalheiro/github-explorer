@@ -61,6 +61,7 @@ function Home() {
     <div className="my-4">
       <div className="row justify-content-center">
         <div className="col-12 col-md-8 col-lg-6">
+          <h1 className="h2 fw-bold mb-4">Buscar usuário do GitHub</h1>
           <form className="mb-4" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="username-input" className="form-label fw-medium">

@@ -13,8 +13,8 @@ export default function Layout({ children }: LayoutProps) {
         <div className="container py-3">
           <Link to={routes.home} className="text-decoration-none text-dark">
             <div className="d-flex align-items-center gap-3">
-              <i className="bi bi-github fs-3"></i>
-              <h1 className="h4 m-0 fw-bold">GitHub Explorer</h1>
+              <i className="bi bi-github fs-3" aria-hidden="true"></i>
+              <span className="h4 m-0 fw-bold">GitHub Explorer</span>
             </div>
           </Link>
         </div>
