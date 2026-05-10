@@ -37,6 +37,10 @@
     <!-- Preconnect for GitHub API and Avatars -->
     <link rel="preconnect" href="https://api.github.com" />
     <link rel="dns-prefetch" href="https://avatars.githubusercontent.com" />
+
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="/src/styles/bootstrap-custom.scss" as="style" />
+    <link rel="preload" href="/src/styles/global.css" as="style" />
   </head>
   <body>
     <div id="root"></div>
