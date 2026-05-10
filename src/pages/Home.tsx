@@ -1,128 +1,57 @@
-import { useEffect } from 'react';
+import { useEffect, useTransition, useActionState, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useGithubUser } from '../hooks/useGithubUser';
-import { useDebounce } from '../hooks/useDebounce';
-import { useFormValidation } from '../hooks/useFormValidation';
-import { validateUsername } from '../utils/validation';
-import { getInputValidationClassName } from '../utils/form';
+import { searchUserAction } from '../actions/searchUser';
 import UserCard from '../components/UserCard';
-import ErrorCard from '../components/ErrorCard';
+import { SearchForm } from '../components/SearchForm';
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [, startTransition] = useTransition();
 
-  const {
-    value: username,
-    setValue: setUsername,
-    touched,
-    setTouched,
-    validation,
-    showFeedback,
-  } = useFormValidation(validateUsername);
-
-  const debouncedUsername = useDebounce(username.trim(), 500);
-
-  const { data, loading, error, fetchUser } = useGithubUser();
-
-  useEffect(() => {
-    const query = searchParams.get('q');
-    if (query) {
-      setUsername(query);
-      fetchUser(query);
+  const [formState, formAction, isFormPending] = useActionState(
+    searchUserAction,
+    {
+      error: null,
+      user: null,
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (debouncedUsername && validation.isValid) {
-      setSearchParams({ q: debouncedUsername });
-      fetchUser(debouncedUsername);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedUsername, validation.isValid]);
-
-  const inputClassName = getInputValidationClassName(
-    'form-control github-input',
-    validation.isValid,
-    showFeedback
   );
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
-    e.preventDefault();
-    setTouched(true);
+  const [username, setUsername] = useState(() => searchParams.get('q') || '');
 
-    if (validation.isValid) {
-      const trimmed = username.trim();
-      setSearchParams({ q: trimmed });
-      await fetchUser(trimmed);
+  useEffect(() => {
+    if (formState.user) {
+      const userLogin = formState.user.login;
+      startTransition(() => setSearchParams({ q: userLogin }));
     }
-  };
-
-  const handleChange = (value: string) => {
-    setUsername(value);
-    if (touched) {
-      setTouched(true);
-    }
-  };
-
-  const handleBlur = () => {
-    setTouched(true);
-  };
+  }, [formState.user, startTransition, setSearchParams]);
 
   return (
     <div className="my-4">
       <div className="row justify-content-center">
         <div className="col-12 col-md-8 col-lg-6">
           <h1 className="h2 fw-bold mb-4">Buscar usuário do GitHub</h1>
-          <form className="mb-4" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="username-input" className="form-label fw-medium">
-                Busca por nome de usuário do GitHub
-              </label>
-              <div className="input-group input-group-lg">
-                <input
-                  id="username-input"
-                  type="text"
-                  className={inputClassName}
-                  placeholder="Ex: facebook, google, vercel"
-                  value={username}
-                  onChange={({ target }) => handleChange(target.value)}
-                  onBlur={handleBlur}
-                  aria-invalid={!validation.isValid && username.length > 0}
-                  aria-describedby="username-feedback"
-                />
-                <button
-                  type="submit"
-                  className="btn btn-dark github-button px-4"
-                  disabled={loading || !validation.isValid}
-                >
-                  {loading ? (
-                    <div className="d-flex align-items-center justify-content-center">
-                      <span>Buscando...</span>
-                    </div>
-                  ) : (
-                    'Buscar'
-                  )}
-                </button>
+
+          <SearchForm
+            username={username}
+            onUsernameChange={setUsername}
+            formAction={formAction}
+            isFormPending={isFormPending}
+          />
+
+          {formState.error && (
+            <div
+              className="alert alert-warning d-flex align-items-center"
+              role="alert"
+            >
+              <i className="bi bi-person-x fs-4 me-3" />
+              <div className="flex-grow-1">
+                <h5 className="alert-heading mb-1">Usuário não encontrado</h5>
+                <p className="mb-0">{formState.error}</p>
               </div>
-              {showFeedback && (
-                <div
-                  id="username-feedback"
-                  className={`validation-feedback ${
-                    validation.isValid ? 'valid' : 'invalid'
-                  }`}
-                  role="status"
-                  aria-live="polite"
-                >
-                  {validation.message}
-                </div>
-              )}
             </div>
-          </form>
+          )}
 
-          {error && <ErrorCard error={error} />}
-
-          {data && <UserCard user={data} />}
+          {formState.user && <UserCard user={formState.user} />}
         </div>
       </div>
     </div>
