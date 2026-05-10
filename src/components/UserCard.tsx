@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { GithubUser } from '../types/githubUser';
 import { routes } from '../types/routes';
+import { getAvatarUrl } from '../utils/avatar';
 
 interface UserCardProps {
   user: GithubUser;
@@ -13,7 +14,7 @@ export default function UserCard({ user }: UserCardProps) {
         <div className="card-body p-4">
           <div className="d-flex align-items-center gap-4">
             <img
-              src={user.avatar_url}
+              src={getAvatarUrl(user.avatar_url, 80)}
               alt={`Avatar de ${user.login}`}
               loading="lazy"
               className="rounded-circle"

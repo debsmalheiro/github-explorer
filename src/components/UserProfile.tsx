@@ -1,5 +1,6 @@
 import type { GithubUser } from '../types/githubUser';
 import { sanitizeUrl } from '../utils/url';
+import { getAvatarUrl } from '../utils/avatar';
 
 interface UserProfileProps {
   user: GithubUser;
@@ -19,7 +20,7 @@ export default function UserProfile({ user }: UserProfileProps) {
       <div className="card-body p-5">
         <div className="d-flex flex-column flex-md-row align-items-center gap-4">
           <img
-            src={user.avatar_url}
+            src={getAvatarUrl(user.avatar_url, 120)}
             alt={`Avatar de ${user.login}`}
             loading="lazy"
             className="rounded-circle"
