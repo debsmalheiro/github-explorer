@@ -1,5 +1,6 @@
 import React from 'react';
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
+import { Icon } from './Icon';
 
 interface Props {
   children: React.ReactNode;
@@ -55,7 +56,10 @@ function ErrorFallback({
           <div className="col-12 col-md-8 col-lg-6">
             <div className="alert alert-danger shadow-sm" role="alert">
               <div className="d-flex align-items-start gap-3">
-                <i className="bi bi-exclamation-triangle-fill fs-1 flex-shrink-0"></i>
+                <Icon
+                  name="exclamation-triangle-fill"
+                  className="fs-1 flex-shrink-0"
+                />
                 <div className="flex-grow-1">
                   <h4 className="alert-heading fw-bold mb-2">
                     Algo deu errado 😢
@@ -81,14 +85,14 @@ function ErrorFallback({
                       className="btn btn-outline-danger"
                       onClick={onReset}
                     >
-                      <i className="bi bi-arrow-clockwise me-2"></i>
+                      <Icon name="arrow-clockwise" className="me-2" />
                       Tentar novamente
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => (window.location.href = '/')}
                     >
-                      <i className="bi bi-house me-2"></i>
+                      <Icon name="house" className="me-2" />
                       Voltar ao início
                     </button>
                   </div>
@@ -101,7 +105,7 @@ function ErrorFallback({
                 Se o problema persistir, entre em contato com o suporte.
               </p>
               <p className="mb-0">
-                <i className="bi bi-github me-1"></i>
+                <Icon name="github" className="me-1" />
                 <a
                   href="https://github.com/debsmalheiro/github-explorer/issues"
                   target="_blank"

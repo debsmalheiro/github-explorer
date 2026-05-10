@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { routes } from '../types/routes';
+import { Icon } from '../components/Icon';
 
 function NotFound() {
   return (
@@ -13,7 +14,7 @@ function NotFound() {
               Ops! A página que você está procurando não existe!
             </p>
             <Link to={routes.home} className="btn btn-dark github-button px-4">
-              <i className="bi bi-house me-2" aria-hidden="true"></i>
+              <Icon name="house" className="me-2" />
               Voltar à página inicial
             </Link>
           </div>

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { routes } from '../types/routes';
+import { Icon } from './Icon';
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="container py-3">
           <Link to={routes.home} className="text-decoration-none text-dark">
             <div className="d-flex align-items-center gap-3">
-              <i className="bi bi-github fs-3" aria-hidden="true"></i>
+              <Icon name="github" className="fs-3" />
               <h1 className="h4 m-0 fw-bold">GitHub Explorer</h1>
             </div>
           </Link>

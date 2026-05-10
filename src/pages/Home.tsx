@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { searchUserAction } from '../actions/searchUser';
 import UserCard from '../components/UserCard';
 import { SearchForm } from '../components/SearchForm';
+import { Icon } from '../components/Icon';
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,7 +44,7 @@ function Home() {
               className="alert alert-warning d-flex align-items-center"
               role="alert"
             >
-              <i className="bi bi-person-x fs-4 me-3" />
+              <Icon name="person-x" className="fs-4 me-3" />
               <div className="flex-grow-1">
                 <h3 className="h5 alert-heading mb-1">
                   Usuário não encontrado
