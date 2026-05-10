@@ -1,0 +1,13 @@
+# robots.txt for GitHub Explorer
+
+User-agent: *
+Allow: /
+
+# Disallow specific paths if needed
+# Disallow: /api/
+
+# Sitemap
+Sitemap: https://github-explorer.app/sitemap.xml
+
+# Crawl-delay (optional)
+# Crawl-delay: 1

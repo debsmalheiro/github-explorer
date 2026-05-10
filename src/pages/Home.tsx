@@ -45,7 +45,9 @@ function Home() {
             >
               <i className="bi bi-person-x fs-4 me-3" />
               <div className="flex-grow-1">
-                <h5 className="alert-heading mb-1">Usuário não encontrado</h5>
+                <h3 className="h5 alert-heading mb-1">
+                  Usuário não encontrado
+                </h3>
                 <p className="mb-0">{formState.error}</p>
               </div>
             </div>

@@ -20,9 +20,9 @@ export default function UserCard({ user }: UserCardProps) {
               style={{ width: '80px', height: '80px', objectFit: 'cover' }}
             />
             <div className="flex-grow-1">
-              <h5 className="card-title mb-1 fw-bold text-dark">
+              <h3 className="h5 card-title mb-1 fw-bold text-dark">
                 {user.name || user.login}
-              </h5>
+              </h3>
 
               <div className="d-flex gap-3 text-muted small">
                 <span>⭐ {user.followers} seguidores</span>
