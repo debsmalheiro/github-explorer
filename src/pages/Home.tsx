@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useGithubUser } from '../hooks/useGithubUser';
 import { useFormValidation } from '../hooks/useFormValidation';
 import { validateUsername } from '../utils/validation';
@@ -6,6 +8,8 @@ import UserCard from '../components/UserCard';
 import ErrorCard from '../components/ErrorCard';
 
 function Home() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const {
     value: username,
     setValue: setUsername,
@@ -16,6 +20,14 @@ function Home() {
   } = useFormValidation(validateUsername);
 
   const { data, loading, error, fetchUser } = useGithubUser();
+
+  useEffect(() => {
+    const query = searchParams.get('q');
+    if (query) {
+      setUsername(query);
+      fetchUser(query);
+    }
+  }, []);
 
   const inputClassName = getInputValidationClassName(
     'form-control github-input',
@@ -28,7 +40,9 @@ function Home() {
     setTouched(true);
 
     if (validation.isValid) {
-      await fetchUser(username.trim());
+      const trimmed = username.trim();
+      setSearchParams({ q: trimmed });
+      await fetchUser(trimmed);
     }
   };
 
