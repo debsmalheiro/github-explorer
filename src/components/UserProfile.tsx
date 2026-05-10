@@ -22,7 +22,9 @@ export default function UserProfile({ user }: UserProfileProps) {
           <img
             src={getAvatarUrl(user.avatar_url, 120)}
             alt={`Avatar de ${user.login}`}
-            loading="lazy"
+            fetchPriority="high"
+            width="120"
+            height="120"
             className="rounded-circle"
             style={{ width: '120px', height: '120px', objectFit: 'cover' }}
           />

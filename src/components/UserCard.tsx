@@ -17,6 +17,8 @@ export default function UserCard({ user }: UserCardProps) {
               src={getAvatarUrl(user.avatar_url, 80)}
               alt={`Avatar de ${user.login}`}
               loading="lazy"
+              width="80"
+              height="80"
               className="rounded-circle"
               style={{ width: '80px', height: '80px', objectFit: 'cover' }}
             />
