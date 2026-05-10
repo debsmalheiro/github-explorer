@@ -6,6 +6,9 @@ import type { GithubRepository } from '../types/githubRepositoriesUser';
 const api = axios.create({
   baseURL: import.meta.env.VITE_GITHUB_API_URL,
   timeout: 10000,
+  headers: {
+    'User-Agent': 'GitHub-Explorer',
+  },
 });
 
 export const githubService: GithubService = {

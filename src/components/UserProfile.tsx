@@ -1,4 +1,5 @@
 import type { GithubUser } from '../types/githubUser';
+import { sanitizeUrl } from '../utils/url';
 
 interface UserProfileProps {
   user: GithubUser;
@@ -62,7 +63,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                 <span>
                   🔗{' '}
                   <a
-                    href={user.blog}
+                    href={sanitizeUrl(user.blog)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-decoration-none"
