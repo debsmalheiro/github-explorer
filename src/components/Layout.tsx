@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,10 +10,12 @@ export default function Layout({ children }: LayoutProps) {
     <div className="d-flex flex-column min-vh-100">
       <header className="fixed-top bg-white border-bottom">
         <div className="container py-3">
-          <div className="d-flex align-items-center gap-3">
-            <i className="bi bi-github fs-3"></i>
-            <h1 className="h4 m-0 fw-bold">GitHub Explorer</h1>
-          </div>
+          <Link to={'/'} className="text-decoration-none text-dark">
+            <div className="d-flex align-items-center gap-3">
+              <i className="bi bi-github fs-3"></i>
+              <h1 className="h4 m-0 fw-bold">GitHub Explorer</h1>
+            </div>
+          </Link>
         </div>
       </header>
       <main className="container flex-grow-1" style={{ paddingTop: '80px' }}>
