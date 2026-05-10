@@ -28,34 +28,32 @@ function Home() {
 
   return (
     <div className="my-4">
-      <div className="row justify-content-center">
-        <div className="col-12 col-md-8 col-lg-6">
-          <h1 className="h2 fw-bold mb-4">Buscar usuário do GitHub</h1>
+      <div className="home-container">
+        <header className="home-header">
+          <h1 className="home-title">Buscar usuário do GitHub</h1>
+          <p className="home-subtitle">
+            Encontre perfis, repositórios e muito mais
+          </p>
+        </header>
 
-          <SearchForm
-            username={username}
-            onUsernameChange={setUsername}
-            formAction={formAction}
-            isFormPending={isFormPending}
-          />
+        <SearchForm
+          username={username}
+          onUsernameChange={setUsername}
+          formAction={formAction}
+          isFormPending={isFormPending}
+        />
 
-          {formState.error && (
-            <div
-              className="alert alert-warning d-flex align-items-center"
-              role="alert"
-            >
-              <Icon name="person-x" className="fs-4 me-3" />
-              <div className="flex-grow-1">
-                <h3 className="h5 alert-heading mb-1">
-                  Usuário não encontrado
-                </h3>
-                <p className="mb-0">{formState.error}</p>
-              </div>
+        {formState.error && (
+          <div className="error-alert" role="alert">
+            <Icon name="person-x" className="error-alert-icon" />
+            <div className="error-alert-content">
+              <h3 className="error-alert-title">Usuário não encontrado</h3>
+              <p className="error-alert-message">{formState.error}</p>
             </div>
-          )}
+          </div>
+        )}
 
-          {formState.user && <UserCard user={formState.user} />}
-        </div>
+        {formState.user && <UserCard user={formState.user} />}
       </div>
     </div>
   );

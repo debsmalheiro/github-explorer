@@ -16,50 +16,48 @@ export function SearchForm({
 }: SearchFormProps) {
   const validation = validateUsername(username);
   const inputClassName = getInputValidationClassName(
-    'form-control github-input',
+    'search-input',
     validation.isValid,
     username.length > 0
   );
 
   return (
-    <form action={formAction} className="mb-4">
-      <div>
-        <label htmlFor="username-input" className="form-label fw-medium">
-          Busca por nome de usuário do GitHub
-        </label>
-        <div className="input-group input-group-lg">
-          <input
-            id="username-input"
-            name="username"
-            type="text"
-            className={inputClassName}
-            placeholder="Ex: facebook, google, vercel"
-            value={username}
-            onChange={({ target }) => onUsernameChange(target.value)}
-            aria-invalid={!validation.isValid && username.length > 0}
-            aria-describedby="username-feedback"
-          />
-          <button
-            type="submit"
-            className="btn btn-dark github-button px-4"
-            disabled={isFormPending || !validation.isValid}
-          >
-            {isFormPending ? 'Buscando...' : 'Buscar'}
-          </button>
-        </div>
-        {username.length > 0 && (
-          <div
-            id="username-feedback"
-            className={`validation-feedback ${
-              validation.isValid ? 'valid' : 'invalid'
-            }`}
-            role="status"
-            aria-live="polite"
-          >
-            {validation.message}
-          </div>
-        )}
+    <form action={formAction} className="search-form">
+      <label htmlFor="username-input" className="search-label">
+        Busca por nome de usuário do GitHub
+      </label>
+      <div className="search-input-group">
+        <input
+          id="username-input"
+          name="username"
+          type="text"
+          className={inputClassName}
+          placeholder="Ex: facebook, google, vercel"
+          value={username}
+          onChange={({ target }) => onUsernameChange(target.value)}
+          aria-invalid={!validation.isValid && username.length > 0}
+          aria-describedby="username-feedback"
+        />
+        <button
+          type="submit"
+          className="search-button"
+          disabled={isFormPending || !validation.isValid}
+        >
+          {isFormPending ? 'Buscando...' : 'Buscar'}
+        </button>
       </div>
+      {username.length > 0 && (
+        <div
+          id="username-feedback"
+          className={`validation-feedback ${
+            validation.isValid ? 'valid' : 'invalid'
+          }`}
+          role="status"
+          aria-live="polite"
+        >
+          {validation.message}
+        </div>
+      )}
     </form>
   );
 }
