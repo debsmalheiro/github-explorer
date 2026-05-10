@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useGithubRepository } from '../hooks/useGithubRepository';
 import ErrorCard from '../components/ErrorCard';
+import RepositoryDetailsSkeleton from '../components/RepositoryDetailsSkeleton';
 import { routes } from '../types/routes';
 
 function RepositoryDetails() {
@@ -18,13 +19,7 @@ function RepositoryDetails() {
   }, [username, repoName]);
 
   if (loading) {
-    return (
-      <div className="d-flex justify-content-center my-5">
-        <div className="spinner-border text-dark" role="status">
-          <span className="visually-hidden">Carregando...</span>
-        </div>
-      </div>
-    );
+    return <RepositoryDetailsSkeleton />;
   }
 
   if (error) {

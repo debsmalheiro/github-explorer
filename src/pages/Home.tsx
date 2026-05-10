@@ -1,18 +1,46 @@
-import { useState } from 'react';
 import { useGithubUser } from '../hooks/useGithubUser';
+import { useFormValidation } from '../hooks/useFormValidation';
+import { validateUsername } from '../utils/validation';
+import { getInputValidationClassName } from '../utils/form';
 import UserCard from '../components/UserCard';
 import ErrorCard from '../components/ErrorCard';
 
 function Home() {
-  const [username, setUsername] = useState('');
+  const {
+    value: username,
+    setValue: setUsername,
+    touched,
+    setTouched,
+    validation,
+    showFeedback,
+  } = useFormValidation(validateUsername);
+
   const { data, loading, error, fetchUser } = useGithubUser();
+
+  const inputClassName = getInputValidationClassName(
+    'form-control github-input',
+    validation.isValid,
+    showFeedback
+  );
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
+    setTouched(true);
 
-    if (username.trim()) {
+    if (validation.isValid) {
       await fetchUser(username.trim());
     }
+  };
+
+  const handleChange = (value: string) => {
+    setUsername(value);
+    if (touched) {
+      setTouched(true);
+    }
+  };
+
+  const handleBlur = () => {
+    setTouched(true);
   };
 
   return (
@@ -20,21 +48,48 @@ function Home() {
       <div className="row justify-content-center">
         <div className="col-12 col-md-8 col-lg-6">
           <form className="mb-4" onSubmit={handleSubmit}>
-            <div className="input-group input-group-lg">
-              <input
-                type="text"
-                className="form-control github-input"
-                placeholder="Digite o nome do usuário..."
-                value={username}
-                onChange={({ target }) => setUsername(target.value)}
-              />
-              <button
-                type="submit"
-                className="btn btn-dark github-button px-4"
-                disabled={loading}
-              >
-                Buscar
-              </button>
+            <div>
+              <label htmlFor="username-input" className="form-label fw-medium">
+                Busca por nome de usuário do GitHub
+              </label>
+              <div className="input-group input-group-lg">
+                <input
+                  id="username-input"
+                  type="text"
+                  className={inputClassName}
+                  placeholder="Ex: facebook, google, vercel"
+                  value={username}
+                  onChange={({ target }) => handleChange(target.value)}
+                  onBlur={handleBlur}
+                  aria-invalid={!validation.isValid && username.length > 0}
+                  aria-describedby="username-feedback"
+                />
+                <button
+                  type="submit"
+                  className="btn btn-dark github-button px-4"
+                  disabled={loading || !validation.isValid}
+                >
+                  {loading ? (
+                    <div className="d-flex align-items-center justify-content-center">
+                      <span>Buscando...</span>
+                    </div>
+                  ) : (
+                    'Buscar'
+                  )}
+                </button>
+              </div>
+              {showFeedback && (
+                <div
+                  id="username-feedback"
+                  className={`validation-feedback ${
+                    validation.isValid ? 'valid' : 'invalid'
+                  }`}
+                  role="status"
+                  aria-live="polite"
+                >
+                  {validation.message}
+                </div>
+              )}
             </div>
           </form>
 

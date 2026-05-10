@@ -4,6 +4,7 @@ import ErrorCard from './ErrorCard';
 import RepositoryCard from './RepositoryCard';
 import Pagination from './Pagination';
 import RepositoriesSort from './RepositoriesSort';
+import { RepositoryListSkeleton } from './RepositorySkeleton';
 
 interface RepositoriesListProps {
   user: string;
@@ -33,10 +34,8 @@ export default function RepositoriesList({ user }: RepositoriesListProps) {
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center my-5">
-        <div className="spinner-border text-dark" role="status">
-          <span className="visually-hidden">Carregando...</span>
-        </div>
+      <div className="mt-4">
+        <RepositoryListSkeleton count={5} />
       </div>
     );
   }

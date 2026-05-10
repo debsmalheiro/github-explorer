@@ -4,6 +4,8 @@ import { useGithubUser } from '../hooks/useGithubUser';
 import UserProfile from '../components/UserProfile';
 import RepositoriesList from '../components/RepositoriesList';
 import ErrorCard from '../components/ErrorCard';
+import ProfileSkeleton from '../components/ProfileSkeleton';
+import { RepositoryListSkeleton } from '../components/RepositorySkeleton';
 
 function Profile() {
   const { username } = useParams<{ username: string }>();
@@ -17,11 +19,12 @@ function Profile() {
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center my-5">
-        <div className="spinner-border text-dark" role="status">
-          <span className="visually-hidden">Carregando...</span>
+      <>
+        <ProfileSkeleton />
+        <div className="mt-4">
+          <RepositoryListSkeleton count={5} />
         </div>
-      </div>
+      </>
     );
   }
 
