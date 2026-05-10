@@ -19,6 +19,7 @@ interface UseGithubRepositoriesUserResult {
   totalPages: number;
   totalItems: number;
   sortOption: SortOption;
+  groupedByLanguage: Record<string, GithubRepository[]>;
   fetchRepositoriesUser: (username: string) => Promise<void>;
   changePage: (page: number) => void;
   changeItemsPerPage: (items: number) => void;
@@ -67,7 +68,7 @@ export function useGithubRepositoriesUser(): UseGithubRepositoriesUserResult {
   const sortedData = useMemo(() => {
     if (!data) return [];
 
-    return [...data].sort((a, b) => {
+    return data.toSorted((a, b) => {
       let aVal: string | number;
       let bVal: string | number;
 
@@ -97,6 +98,14 @@ export function useGithubRepositoriesUser(): UseGithubRepositoriesUserResult {
       return 0;
     });
   }, [data, sortField, sortDirection]);
+
+  const groupedByLanguage = useMemo(() => {
+    if (!data) return {};
+    return Object.groupBy(
+      data,
+      (repo) => repo.language || 'Sem linguagem'
+    ) as Record<string, GithubRepository[]>;
+  }, [data]);
 
   const totalPages = useMemo(() => {
     if (!data) return 0;
@@ -132,6 +141,7 @@ export function useGithubRepositoriesUser(): UseGithubRepositoriesUserResult {
     totalPages,
     totalItems: data?.length || 0,
     sortOption,
+    groupedByLanguage,
     fetchRepositoriesUser,
     changePage,
     changeItemsPerPage,
