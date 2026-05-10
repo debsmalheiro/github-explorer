@@ -1,6 +1,7 @@
 import Profile from '../pages/Profile';
 import Home from '../pages/Home';
 import RepositoryDetails from '../pages/RepositoryDetails';
+import NotFound from '../pages/NotFound';
 
 export const routes = [
   {
@@ -14,5 +15,9 @@ export const routes = [
   {
     path: 'repo/:username/:repoName',
     component: RepositoryDetails,
+  },
+  {
+    path: '*',
+    component: NotFound,
   },
 ];
