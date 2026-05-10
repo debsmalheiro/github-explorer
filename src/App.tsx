@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import { routes } from './routes';
 import { RouteErrorFallback } from './components/ErrorBoundary';
+import { RouteSkeleton } from './components/RouteSkeleton';
 
 function App() {
   return (
@@ -11,7 +13,11 @@ function App() {
           <Route
             key={route.path}
             path={route.path}
-            element={<route.component />}
+            element={
+              <Suspense fallback={<RouteSkeleton />}>
+                <route.component />
+              </Suspense>
+            }
           />
         ))}
         <Route path="*" element={<RouteErrorFallback />} />

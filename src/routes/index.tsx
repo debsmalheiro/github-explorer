@@ -1,23 +1,20 @@
-import Profile from '../pages/Profile';
-import Home from '../pages/Home';
-import RepositoryDetails from '../pages/RepositoryDetails';
-import NotFound from '../pages/NotFound';
+import { lazy } from 'react';
 
 export const routes = [
   {
     path: '/',
-    component: Home,
+    component: lazy(() => import('../pages/Home')),
   },
   {
     path: 'profile/:username',
-    component: Profile,
+    component: lazy(() => import('../pages/Profile')),
   },
   {
     path: 'repo/:username/:repoName',
-    component: RepositoryDetails,
+    component: lazy(() => import('../pages/RepositoryDetails')),
   },
   {
     path: '*',
-    component: NotFound,
+    component: lazy(() => import('../pages/NotFound')),
   },
 ];
