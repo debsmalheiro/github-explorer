@@ -1,73 +1,91 @@
-# React + TypeScript + Vite
+# GitHub Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação client-side que consulta a API do GitHub e exibe informações de usuários e seus repositórios mais populares.
 
-Currently, two official plugins are available:
+## 🚀 Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A aplicação está disponível online em: https://github-explorer-dborah-malheiros-projects.vercel.app/
 
-## React Compiler
+## 📋 Instalação
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Pré-requisitos
 
-## Expanding the ESLint configuration
+- Node.js (v20 ou superior)
+- npm ou yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Passos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clone o repositório:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/debsmalheiro/github-explorer.git
+cd github-explorer
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Instale as dependências:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. Configure a variável de ambiente:
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```env
+VITE_GITHUB_API_URL=https://api.github.com
+```
+
+## ▶️ Como executar
+
+### Modo de desenvolvimento
+
+```bash
+npm run dev
+```
+
+Acesse: `http://localhost:5173`
+
+### Build para produção
+
+```bash
+npm run build
+```
+
+### Preview da build de produção
+
+```bash
+npm run preview
+```
+
+## 🛠️ Tecnologias
+
+- **React 19** — Framework UI
+- **Vite** — Build tool
+- **TypeScript** — Tipagem estática
+- **React Router DOM** — Rotas
+- **Axios** — Cliente HTTP
+- **Bootstrap 5** — Framework CSS responsivo
+
+## 📱 Funcionalidades
+
+| Funcionalidade             | Descrição                                            |
+| -------------------------- | ---------------------------------------------------- |
+| 🔍 Busca de usuário        | Pesquise qualquer usuário do GitHub                  |
+| 👤 Detalhes do perfil      | Avatar, bio, seguidores, seguindo, localização, etc. |
+| 📦 Lista de repositórios   | Repositórios ordenados por estrelas (decrescente)    |
+| 🔄 Ordenação               | Alterne entre estrelas, nome, data e linguagem       |
+| 📄 Detalhes do repositório | Informações completas com link para o GitHub         |
+
+## 📂 Estrutura do projeto
+
+```
+src/
+├── components/       # Componentes reutilizáveis
+├── hooks/           # Custom React hooks
+├── pages/           # Páginas da aplicação
+├── routes/          # Configuração de rotas
+├── services/        # Serviços de API
+├── types/           # Tipos TypeScript
+└── main.tsx         # Entry point
 ```
