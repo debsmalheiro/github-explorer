@@ -21,6 +21,7 @@ export default function UserProfile({ user }: UserProfileProps) {
           <img
             src={user.avatar_url}
             alt={`Avatar de ${user.login}`}
+            loading="lazy"
             className="rounded-circle"
             style={{ width: '120px', height: '120px', objectFit: 'cover' }}
           />

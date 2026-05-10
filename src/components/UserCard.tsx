@@ -15,6 +15,7 @@ export default function UserCard({ user }: UserCardProps) {
             <img
               src={user.avatar_url}
               alt={`Avatar de ${user.login}`}
+              loading="lazy"
               className="rounded-circle"
               style={{ width: '80px', height: '80px', objectFit: 'cover' }}
             />

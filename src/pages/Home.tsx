@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useGithubUser } from '../hooks/useGithubUser';
+import { useDebounce } from '../hooks/useDebounce';
 import { useFormValidation } from '../hooks/useFormValidation';
 import { validateUsername } from '../utils/validation';
 import { getInputValidationClassName } from '../utils/form';
@@ -19,6 +20,8 @@ function Home() {
     showFeedback,
   } = useFormValidation(validateUsername);
 
+  const debouncedUsername = useDebounce(username.trim(), 500);
+
   const { data, loading, error, fetchUser } = useGithubUser();
 
   useEffect(() => {
@@ -27,7 +30,16 @@ function Home() {
       setUsername(query);
       fetchUser(query);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (debouncedUsername && validation.isValid) {
+      setSearchParams({ q: debouncedUsername });
+      fetchUser(debouncedUsername);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedUsername, validation.isValid]);
 
   const inputClassName = getInputValidationClassName(
     'form-control github-input',
