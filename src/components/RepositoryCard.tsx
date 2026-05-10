@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { GithubRepository } from '../types/githubRepositoriesUser';
+import { routes } from '../types/routes';
 
 interface RepositoryCardProps {
   repository: GithubRepository;
@@ -15,7 +16,7 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
           <div className="d-flex align-items-start justify-content-between gap-2">
             <div>
               <Link
-                to={`/repo/${username}/${repoName}`}
+                to={routes.repo(username, repoName)}
                 className="text-primary fw-bold text-decoration-none"
               >
                 {repository.full_name}

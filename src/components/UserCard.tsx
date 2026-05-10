@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { GithubUser } from '../types/githubUser';
+import { routes } from '../types/routes';
 
 interface UserCardProps {
   user: GithubUser;
@@ -7,7 +8,7 @@ interface UserCardProps {
 
 export default function UserCard({ user }: UserCardProps) {
   return (
-    <Link to={`/profile/${user.login}`} className="text-decoration-none">
+    <Link to={routes.profile(user.login)} className="text-decoration-none">
       <div className="card shadow-sm border-0 h-auto">
         <div className="card-body p-4">
           <div className="d-flex align-items-center gap-4">

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useGithubRepository } from '../hooks/useGithubRepository';
 import ErrorCard from '../components/ErrorCard';
+import { routes } from '../types/routes';
 
 function RepositoryDetails() {
   const { username, repoName } = useParams<{
@@ -39,7 +40,7 @@ function RepositoryDetails() {
       <div className="row justify-content-center">
         <div className="col-12 col-md-10 col-lg-8">
           <Link
-            to={`/profile/${username}`}
+            to={routes.profile(username || '')}
             className="text-decoration-none text-secondary mb-3 d-inline-block"
           >
             ← Voltar para {username}
