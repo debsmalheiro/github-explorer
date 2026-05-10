@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { GithubRepository } from '../types/githubRepositoriesUser';
 
 interface RepositoryCardProps {
@@ -5,20 +6,20 @@ interface RepositoryCardProps {
 }
 
 export default function RepositoryCard({ repository }: RepositoryCardProps) {
+  const [username, repoName] = repository.full_name.split('/');
+
   return (
     <div className="card shadow-sm border-0 h-auto hover-shadow transition-shadow">
       <div className="card-body p-4">
         <div className="d-flex flex-column gap-2">
           <div className="d-flex align-items-start justify-content-between gap-2">
             <div>
-              <a
-                href={repository.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to={`/repo/${username}/${repoName}`}
                 className="text-primary fw-bold text-decoration-none"
               >
                 {repository.full_name}
-              </a>
+              </Link>
             </div>
           </div>
 

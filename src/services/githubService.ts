@@ -19,4 +19,8 @@ export const githubService: GithubService = {
     );
     return data;
   },
+  getRepositoryById: async (fullName: string) => {
+    const { data } = await api.get<GithubRepository>(`/repos/${fullName}`);
+    return data;
+  },
 };
